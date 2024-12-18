@@ -1,0 +1,4 @@
+sqlalchemy>=2.0.0
+readhub-crawler>=1.0.0
+python-dotenv>=0.19.0
+crawl4ai>=1.0.0
