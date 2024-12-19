@@ -50,6 +50,8 @@ def insert_article(article_data):
         id_counter = article_count + 1
         print(f"article 表中的数据个数加一为: {id_counter}")
 
+        print(f"成功获取 {len(article_data)} 条文章数据。")
+
         #定义一个变量记录成功循环的次数
         success_count = 0
         for item in article_data:
