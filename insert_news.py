@@ -48,9 +48,17 @@ def insert_article(article_data):
         article_count = session.query(func.count(Article.id)).scalar()
 
         id_counter = article_count + 1
-        print(f"article 表中的数据个数: {id_counter}")
+        print(f"article 表中的数据个数加一为: {id_counter}")
 
+        #定义一个变量记录成功循环的次数
+        success_count = 0
         for item in article_data:
+            # 检查数据库中是否已经存在相同标题的文章
+            existing_article = session.query(Article).filter_by(title=item.get('title', '')[:30]).first()
+            if existing_article:
+                print(f"文章 '{item.get('title', '')[:30]}' 已存在，跳过插入。")
+                continue
+
             current_time = datetime.utcnow()
             article = Article(
                 id=id_counter,
@@ -66,8 +74,9 @@ def insert_article(article_data):
             session.add(article)
             print(article.__dict__)
             id_counter += 1
+            success_count += 1
         session.commit()
-        print(f"成功将 {len(article_data)} 条文章插入数据库。")
+        print(f"成功将 {success_count} 条文章插入数据库。")
     except Exception as e:
         session.rollback()
         print(f"发生错误：{str(e)}")
