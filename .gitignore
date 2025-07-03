@@ -1,6 +1,4 @@
-.env
-main.py
-test1.py
-practice1.py
+.env.dev
 .idea
 __pycache__
+.env
