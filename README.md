@@ -25,4 +25,3 @@ playwright install-deps
 python3 insert_news.py
 ```
 
-djskfkjfk
