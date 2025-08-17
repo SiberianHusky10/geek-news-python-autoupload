@@ -26,6 +26,8 @@ class Article(Base):
     content = Column(String(10000), nullable=False, comment='文章内容')
     cover_img = Column(String(128), nullable=False, comment='文章封面')
     state = Column(Enum('已发布', '草稿'), default='草稿', comment='文章状态: 只能是[已发布] 或者 [草稿]')
+    # tags
+    status = Column(String(10), nullable=False, comment='处理状态', default='ready')
     category_id = Column(Integer, comment='文章分类ID')
     create_user = Column(Integer, nullable=False, comment='创建人ID')
     create_time = Column(DateTime, nullable=False, comment='创建时间')
