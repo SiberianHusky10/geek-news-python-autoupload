@@ -28,6 +28,7 @@ class Article(Base):
     state = Column(Enum('已发布', '草稿'), default='草稿', comment='文章状态: 只能是[已发布] 或者 [草稿]')
     # tags
     status = Column(String(10), nullable=False, comment='处理状态', default='ready')
+    tags = Column(String(50), nullable=False, comment='文章标签，逗号分隔')
     category_id = Column(Integer, comment='文章分类ID')
     create_user = Column(Integer, nullable=False, comment='创建人ID')
     create_time = Column(DateTime, nullable=False, comment='创建时间')
@@ -65,9 +66,10 @@ def insert_article(article_data):
             article = Article(
                 id=id_counter,
                 title=item.get('title', '')[:30],  # 限制标题长度为30
-                content=item.get('content', '')[:10000],  # 限制内容长度为10000
-                cover_img=item.get('link', '')[:128],  # 限制封面图片URL长度为128
+                content=item.get('summary', '')[:10000],  # 限制内容长度为10000
+                cover_img=item.get('url', '')[:128],  # 限制封面图片URL长度为128
                 state=item.get('state', '草稿'),
+                status=item.get('status', 'ready'),  # 默认状态为 ready
                 category_id=item.get('category_id', 3),
                 create_user=item.get('create_user', 4),  # 假设默认用户ID为4
                 create_time=current_time,

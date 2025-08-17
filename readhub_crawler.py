@@ -71,6 +71,8 @@ class ReadhubCrawler:
                 if item.success:
                    data = json.loads(item.extracted_content)
                    print(json.dumps(data, indent=2, ensure_ascii=False))
+                   return data
+
 
 
     def get_news(self):
